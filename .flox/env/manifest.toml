@@ -1,8 +1,14 @@
 version = 1
 
+[include]
+environments = [
+    { remote = "flox/postgres" }
+]
+
 [install]
 requests.pkg-path = "python313Packages.requests"
 sqlite.pkg-path = "sqlite"
+psycopg2.pkg-path = "python313Packages.psycopg2"
 
 [hook]
 on-activate = '''
