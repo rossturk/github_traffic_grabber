@@ -1,6 +1,6 @@
 # GitHub Traffic Grabber
 
-A Python script to track and store GitHub repository traffic statistics using SQLite.
+A Python script to track and store GitHub repository traffic statistics using PostgreSQL.
 
 ## Features
 
@@ -8,13 +8,14 @@ A Python script to track and store GitHub repository traffic statistics using SQ
 - Store popular content paths
 - Track referring sites
 - Historical data preservation
-- SQLite database for efficient querying
+- PostgreSQL database for efficient querying and analysis
+- Automatic database and schema creation
 - Idempotent operation (safe to run multiple times)
 
 ## Prerequisites
 
 - GitHub personal access token with `repo` scope
-- Flox environment (includes Python, SQLite, and requests)
+- Flox environment (includes Python, PostgreSQL, psycopg2, and requests)
 
 ## Setup
 
@@ -31,9 +32,9 @@ A Python script to track and store GitHub repository traffic statistics using SQ
    
    The Flox environment automatically loads the token from `.token` when activated.
 
-3. Activate the Flox environment:
+3. Activate the Flox environment with PostgreSQL services:
    ```bash
-   flox activate
+   flox activate --start-services
    ```
 
 ## Usage
@@ -50,12 +51,27 @@ python3 github_traffic_grabber.py --list-repos
 
 ## Database Schema
 
-The script creates an SQLite database (`github_traffic.db`) with the following tables:
+The script automatically creates a PostgreSQL database (`github_traffic_data`) with the following tables:
 
-- `daily_views`: Historical daily view counts
+- `daily_views`: Historical daily view counts (with DATE and TIMESTAMP types)
 - `current_totals`: Latest cumulative totals
 - `popular_paths`: Popular content paths by date
 - `referrers`: Referring sites by date
+
+## Database Configuration
+
+The script uses the following default PostgreSQL connection settings:
+- Host: `localhost`
+- Port: `15432` (matches flox/postgres configuration)
+- Database: `github_traffic_data`
+- User: `pguser`
+- Password: `pgpass`
+
+These can be overridden using environment variables:
+- `DB_HOST`
+- `DB_PORT` 
+- `DB_USER`
+- `DB_PASS`
 
 
 ## Notes

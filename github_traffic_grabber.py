@@ -5,33 +5,75 @@ import os
 from datetime import datetime
 import sys
 import argparse
-import sqlite3
+import psycopg2
+from psycopg2.extras import RealDictCursor
 from contextlib import contextmanager
 
 # GitHub API configuration
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-DB_FILE = "github_traffic.db"
+
+# PostgreSQL configuration
+DB_HOST = os.environ.get("DB_HOST", "localhost")
+DB_PORT = os.environ.get("DB_PORT", "15432")
+DB_NAME = "github_traffic_data"
+DB_USER = os.environ.get("DB_USER", "pguser")
+DB_PASS = os.environ.get("DB_PASS", "pgpass")
 
 @contextmanager
 def get_db():
     """Context manager for database connections"""
-    conn = sqlite3.connect(DB_FILE)
-    conn.row_factory = sqlite3.Row
+    conn = psycopg2.connect(
+        host=DB_HOST,
+        port=DB_PORT,
+        database=DB_NAME,
+        user=DB_USER,
+        password=DB_PASS,
+        cursor_factory=RealDictCursor
+    )
     try:
         yield conn
     finally:
         conn.close()
 
+def ensure_database_exists():
+    """Ensure the database exists, create if it doesn't"""
+    # Connect to default postgres database to create our database
+    try:
+        conn = psycopg2.connect(
+            host=DB_HOST,
+            port=DB_PORT,
+            database="postgres",
+            user=DB_USER,
+            password=DB_PASS
+        )
+        conn.autocommit = True
+        cur = conn.cursor()
+        
+        # Check if database exists
+        cur.execute("SELECT 1 FROM pg_database WHERE datname = %s", (DB_NAME,))
+        if not cur.fetchone():
+            cur.execute(f"CREATE DATABASE {DB_NAME}")
+            print(f"Created database: {DB_NAME}")
+        
+        cur.close()
+        conn.close()
+    except psycopg2.Error as e:
+        print(f"Error ensuring database exists: {e}")
+        sys.exit(1)
+
 def init_database():
     """Initialize database schema"""
+    ensure_database_exists()
+    
     with get_db() as conn:
-        conn.executescript("""
+        cur = conn.cursor()
+        cur.execute("""
             CREATE TABLE IF NOT EXISTS daily_views (
                 repo TEXT NOT NULL,
-                date TEXT NOT NULL,
+                date DATE NOT NULL,
                 count INTEGER NOT NULL,
                 uniques INTEGER NOT NULL,
-                timestamp TEXT NOT NULL,
+                timestamp TIMESTAMP NOT NULL,
                 PRIMARY KEY (repo, date)
             );
             
@@ -39,36 +81,44 @@ def init_database():
                 repo TEXT PRIMARY KEY,
                 count INTEGER NOT NULL,
                 uniques INTEGER NOT NULL,
-                timestamp TEXT NOT NULL
+                timestamp TIMESTAMP NOT NULL
             );
             
             CREATE TABLE IF NOT EXISTS popular_paths (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 repo TEXT NOT NULL,
-                date TEXT NOT NULL,
+                date DATE NOT NULL,
                 path TEXT NOT NULL,
                 title TEXT,
                 count INTEGER NOT NULL,
                 uniques INTEGER NOT NULL,
-                timestamp TEXT NOT NULL
+                timestamp TIMESTAMP NOT NULL
             );
             
             CREATE TABLE IF NOT EXISTS referrers (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 repo TEXT NOT NULL,
-                date TEXT NOT NULL,
+                date DATE NOT NULL,
                 referrer TEXT NOT NULL,
                 count INTEGER NOT NULL,
                 uniques INTEGER NOT NULL,
-                timestamp TEXT NOT NULL
+                timestamp TIMESTAMP NOT NULL
             );
             
+        """)
+        
+        # Create indexes
+        cur.execute("""
             CREATE INDEX IF NOT EXISTS idx_popular_paths_repo_date 
                 ON popular_paths(repo, date);
+        """)
+        cur.execute("""
             CREATE INDEX IF NOT EXISTS idx_referrers_repo_date 
                 ON referrers(repo, date);
         """)
+        
         conn.commit()
+        cur.close()
 
 def get_github_views(repo):
     """Fetch view statistics from GitHub API"""
@@ -173,65 +223,84 @@ def list_accessible_repos():
 def save_daily_views(conn, repo, views_data):
     """Save daily views data to database"""
     if "views" in views_data:
+        cur = conn.cursor()
         for day_data in views_data["views"]:
             date = day_data["timestamp"][:10]  # Extract YYYY-MM-DD
-            conn.execute("""
-                INSERT OR REPLACE INTO daily_views (repo, date, count, uniques, timestamp)
-                VALUES (?, ?, ?, ?, ?)
+            cur.execute("""
+                INSERT INTO daily_views (repo, date, count, uniques, timestamp)
+                VALUES (%s, %s, %s, %s, %s)
+                ON CONFLICT (repo, date) DO UPDATE
+                SET count = EXCLUDED.count,
+                    uniques = EXCLUDED.uniques,
+                    timestamp = EXCLUDED.timestamp
             """, (repo, date, day_data["count"], day_data["uniques"], day_data["timestamp"]))
+        cur.close()
 
 def save_current_totals(conn, repo, views_data):
     """Save current totals to database"""
-    current_timestamp = datetime.now().isoformat()
-    conn.execute("""
-        INSERT OR REPLACE INTO current_totals (repo, count, uniques, timestamp)
-        VALUES (?, ?, ?, ?)
+    current_timestamp = datetime.now()
+    cur = conn.cursor()
+    cur.execute("""
+        INSERT INTO current_totals (repo, count, uniques, timestamp)
+        VALUES (%s, %s, %s, %s)
+        ON CONFLICT (repo) DO UPDATE
+        SET count = EXCLUDED.count,
+            uniques = EXCLUDED.uniques,
+            timestamp = EXCLUDED.timestamp
     """, (repo, views_data.get("count", 0), views_data.get("uniques", 0), current_timestamp))
+    cur.close()
 
 def save_popular_paths(conn, repo, popular_paths):
     """Save popular paths to database"""
     if popular_paths:
-        today = datetime.now().strftime("%Y-%m-%d")
-        current_timestamp = datetime.now().isoformat()
+        today = datetime.now().date()
+        current_timestamp = datetime.now()
         
+        cur = conn.cursor()
         # Delete existing entries for today
-        conn.execute("DELETE FROM popular_paths WHERE repo = ? AND date = ?", (repo, today))
+        cur.execute("DELETE FROM popular_paths WHERE repo = %s AND date = %s", (repo, today))
         
         # Insert new entries
         for path in popular_paths:
-            conn.execute("""
+            cur.execute("""
                 INSERT INTO popular_paths (repo, date, path, title, count, uniques, timestamp)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
             """, (repo, today, path['path'], path.get('title', ''), 
                   path['count'], path['uniques'], current_timestamp))
+        cur.close()
 
 def save_referrers(conn, repo, referrers):
     """Save referrers to database"""
     if referrers:
-        today = datetime.now().strftime("%Y-%m-%d")
-        current_timestamp = datetime.now().isoformat()
+        today = datetime.now().date()
+        current_timestamp = datetime.now()
         
+        cur = conn.cursor()
         # Delete existing entries for today
-        conn.execute("DELETE FROM referrers WHERE repo = ? AND date = ?", (repo, today))
+        cur.execute("DELETE FROM referrers WHERE repo = %s AND date = %s", (repo, today))
         
         # Insert new entries
         for referrer in referrers:
-            conn.execute("""
+            cur.execute("""
                 INSERT INTO referrers (repo, date, referrer, count, uniques, timestamp)
-                VALUES (?, ?, ?, ?, ?, ?)
+                VALUES (%s, %s, %s, %s, %s, %s)
             """, (repo, today, referrer['referrer'], 
                   referrer['count'], referrer['uniques'], current_timestamp))
+        cur.close()
 
 def get_historical_views(conn, repo):
     """Get historical views from database"""
-    cursor = conn.execute("""
+    cur = conn.cursor()
+    cur.execute("""
         SELECT date, count, uniques 
         FROM daily_views 
-        WHERE repo = ? 
+        WHERE repo = %s 
         ORDER BY date DESC 
         LIMIT 14
     """, (repo,))
-    return cursor.fetchall()
+    results = cur.fetchall()
+    cur.close()
+    return results
 
 def main():
     """Main function to fetch and store GitHub view data"""
@@ -263,8 +332,8 @@ def main():
     
     if not args.repo:
         print("Error: Please specify a repository")
-        print("Usage: python3 github_views_tracker_sqlite.py owner/repo")
-        print("   or: python3 github_views_tracker_sqlite.py --list-repos")
+        print("Usage: python3 github_traffic_grabber.py owner/repo")
+        print("   or: python3 github_traffic_grabber.py --list-repos")
         sys.exit(1)
     
     # Get current views with historical data
@@ -304,7 +373,7 @@ def main():
             for referrer in referrers[:5]:
                 print(f"  {referrer['referrer']}: {referrer['count']} views, {referrer['uniques']} unique visitors")
         
-        print(f"\nData saved to {DB_FILE}")
+        print(f"\nData saved to PostgreSQL database: {DB_NAME}")
 
 if __name__ == "__main__":
     main()
