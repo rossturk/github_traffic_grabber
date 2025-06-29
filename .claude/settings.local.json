@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(sqlite3:*)",
+      "Bash(git init:*)"
+    ],
+    "deny": []
+  }
+}

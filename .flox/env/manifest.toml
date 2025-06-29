@@ -1,0 +1,15 @@
+version = 1
+
+[install]
+requests.pkg-path = "python313Packages.requests"
+sqlite.pkg-path = "sqlite"
+
+[hook]
+on-activate = '''
+
+if [ -f .token ]; then
+    export GITHUB_TOKEN=$(cat .token)
+else
+    echo "No .token file found. Please create one with your GitHub token."
+fi
+'''

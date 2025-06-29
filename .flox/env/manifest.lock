@@ -1,0 +1,286 @@
+{
+  "lockfile-version": 1,
+  "manifest": {
+    "version": 1,
+    "install": {
+      "requests": {
+        "pkg-path": "python313Packages.requests"
+      },
+      "sqlite": {
+        "pkg-path": "sqlite"
+      }
+    },
+    "hook": {
+      "on-activate": "\nif [ -f .token ]; then\n    export GITHUB_TOKEN=$(cat .token)\nelse\n    echo \"No .token file found. Please create one with your GitHub token.\"\nfi\n"
+    },
+    "options": {}
+  },
+  "packages": [
+    {
+      "attr_path": "python313Packages.requests",
+      "broken": false,
+      "derivation": "/nix/store/3d205688j7cdvqmpgkn5vgna2kf50l7d-python3.13-requests-2.32.3.drv",
+      "description": "HTTP library for Python",
+      "install_id": "requests",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "python3.13-requests-2.32.3",
+      "pname": "requests",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T00:36:41.620811Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.32.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/ih90bncaf833c5mf4qq89pdcdia3hfhn-python3.13-requests-2.32.3-dist",
+        "out": "/nix/store/4x4hb7nizbkwp0hwz1fipajm22zx1b1l-python3.13-requests-2.32.3"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python313Packages.requests",
+      "broken": false,
+      "derivation": "/nix/store/754l24vwsmii0zy8ml6320scq6ngk99q-python3.13-requests-2.32.3.drv",
+      "description": "HTTP library for Python",
+      "install_id": "requests",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "python3.13-requests-2.32.3",
+      "pname": "requests",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T00:55:35.837632Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.32.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/nan651k5hhkc35srjxw220vpf7qh9lqy-python3.13-requests-2.32.3-dist",
+        "out": "/nix/store/pi2w70a236p16shfa5vi8dwxjcc6svl3-python3.13-requests-2.32.3"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python313Packages.requests",
+      "broken": false,
+      "derivation": "/nix/store/kbmffjinls287kzlp6j3vl1vm1fqcynb-python3.13-requests-2.32.3.drv",
+      "description": "HTTP library for Python",
+      "install_id": "requests",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "python3.13-requests-2.32.3",
+      "pname": "requests",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T01:12:49.478032Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.32.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/367r3b8b60zncfis0x0i76qvlmm97lgn-python3.13-requests-2.32.3-dist",
+        "out": "/nix/store/jbz2ghxfv1anxz9wsdfrkn3axn568j2i-python3.13-requests-2.32.3"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python313Packages.requests",
+      "broken": false,
+      "derivation": "/nix/store/pxbz9m1mr2m53zvf0x9w6sg1pq6d41bd-python3.13-requests-2.32.3.drv",
+      "description": "HTTP library for Python",
+      "install_id": "requests",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "python3.13-requests-2.32.3",
+      "pname": "requests",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T01:33:20.367677Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.32.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/b90c1mqwrry5jjhns9zfx3rykcqg3gcb-python3.13-requests-2.32.3-dist",
+        "out": "/nix/store/rxqnbgz2yrhhzfp0i2wf9ikvnllj2ldk-python3.13-requests-2.32.3"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "sqlite",
+      "broken": false,
+      "derivation": "/nix/store/h531r1c9vj315fkyq2cv77b2dzddmzbx-sqlite-3.48.0.drv",
+      "description": "Self-contained, serverless, zero-configuration, transactional SQL database engine",
+      "install_id": "sqlite",
+      "license": "Public Domain",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "sqlite-3.48.0",
+      "pname": "sqlite",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T00:36:57.359659Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.48.0",
+      "outputs_to_install": [
+        "bin",
+        "man"
+      ],
+      "outputs": {
+        "bin": "/nix/store/cq20rd1ci51s72zv7k29h63clrj6rl0l-sqlite-3.48.0-bin",
+        "dev": "/nix/store/i30kh3xb6miyckm5nq554lmwfgciyxb7-sqlite-3.48.0-dev",
+        "doc": "/nix/store/hxvmkk8icrgshsdg39qlsn9bia3dz41z-sqlite-3.48.0-doc",
+        "man": "/nix/store/sal36w50bf6hlv076n4bypsyk51rn3ki-sqlite-3.48.0-man",
+        "out": "/nix/store/3q2bsgj3rpj8xksh6zgscwv3g1mzcjxy-sqlite-3.48.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "sqlite",
+      "broken": false,
+      "derivation": "/nix/store/rxxka9k7b6whypngh48fhr3awiaz6hj2-sqlite-3.48.0.drv",
+      "description": "Self-contained, serverless, zero-configuration, transactional SQL database engine",
+      "install_id": "sqlite",
+      "license": "Public Domain",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "sqlite-3.48.0",
+      "pname": "sqlite",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T00:55:58.206540Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.48.0",
+      "outputs_to_install": [
+        "bin",
+        "man"
+      ],
+      "outputs": {
+        "bin": "/nix/store/j9gsxv41ravm46zxkq6bz0kih7vikf2q-sqlite-3.48.0-bin",
+        "debug": "/nix/store/cchzb2prmi3b93r0n252nj9kmi8sq15h-sqlite-3.48.0-debug",
+        "dev": "/nix/store/qq5r0v7w2knd099ih1yi705sgqb6xrq4-sqlite-3.48.0-dev",
+        "doc": "/nix/store/dy5bgi74fdcyrvsqljcm71ys8vln6jwq-sqlite-3.48.0-doc",
+        "man": "/nix/store/53xmz12n4qch61r792wvlm8aaw88r2mv-sqlite-3.48.0-man",
+        "out": "/nix/store/nzzrpcj9r48kq73fwibjxbwpnykrj5rf-sqlite-3.48.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "sqlite",
+      "broken": false,
+      "derivation": "/nix/store/dr069z6wipckxdjwcsdhk5lsr4f5abw2-sqlite-3.48.0.drv",
+      "description": "Self-contained, serverless, zero-configuration, transactional SQL database engine",
+      "install_id": "sqlite",
+      "license": "Public Domain",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "sqlite-3.48.0",
+      "pname": "sqlite",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T01:13:05.671438Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.48.0",
+      "outputs_to_install": [
+        "bin",
+        "man"
+      ],
+      "outputs": {
+        "bin": "/nix/store/whxzqmryz1s807f9difm7sbky86p0mpl-sqlite-3.48.0-bin",
+        "dev": "/nix/store/2p883ilw7k58sq8hwcnl519di738wxp0-sqlite-3.48.0-dev",
+        "doc": "/nix/store/dz22l0c3h2gxvzx45vkwcwd3sr0mvjs5-sqlite-3.48.0-doc",
+        "man": "/nix/store/c1q9an2k734218s47hsb3w7ppa5pdpgz-sqlite-3.48.0-man",
+        "out": "/nix/store/9wjh0cydjvncz80x3l3flw67rvq6jwdq-sqlite-3.48.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "sqlite",
+      "broken": false,
+      "derivation": "/nix/store/5z99pfws3r68vdxjbh05ryd063vqzrix-sqlite-3.48.0.drv",
+      "description": "Self-contained, serverless, zero-configuration, transactional SQL database engine",
+      "install_id": "sqlite",
+      "license": "Public Domain",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "sqlite-3.48.0",
+      "pname": "sqlite",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T01:33:44.521040Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.48.0",
+      "outputs_to_install": [
+        "bin",
+        "man"
+      ],
+      "outputs": {
+        "bin": "/nix/store/b83kagl3d98zf8dbvh52lw4xg881bhkf-sqlite-3.48.0-bin",
+        "debug": "/nix/store/719sjqlrhmrn02079dam88m0ch4gwm7h-sqlite-3.48.0-debug",
+        "dev": "/nix/store/92gwa4j45skp8d096csmnj2a8jcn0q9w-sqlite-3.48.0-dev",
+        "doc": "/nix/store/a0h09d196h7j564mrcy15bldd95blw7j-sqlite-3.48.0-doc",
+        "man": "/nix/store/xrjy0a756pb41qq9a38lqvy2m7jd78p5-sqlite-3.48.0-man",
+        "out": "/nix/store/yfjzkkkyxcalyj7l1n4d4y6s81i65hmy-sqlite-3.48.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    }
+  ]
+}
