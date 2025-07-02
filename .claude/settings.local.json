@@ -5,7 +5,10 @@
       "Bash(sqlite3:*)",
       "Bash(git init:*)",
       "WebFetch(domain:flox.dev)",
-      "Bash(PGPASSWORD=pgpass psql:*)"
+      "Bash(PGPASSWORD=pgpass psql:*)",
+      "Bash(flox search:*)",
+      "Bash(python3:*)",
+      "Bash(python:*)"
     ],
     "deny": []
   }

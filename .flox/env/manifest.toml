@@ -9,6 +9,7 @@ environments = [
 requests.pkg-path = "python313Packages.requests"
 sqlite.pkg-path = "sqlite"
 psycopg2.pkg-path = "python313Packages.psycopg2"
+termgraph.pkg-path = "python313Packages.termgraph"
 
 [hook]
 on-activate = '''

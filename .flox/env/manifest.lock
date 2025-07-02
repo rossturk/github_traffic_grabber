@@ -17,6 +17,9 @@
       },
       "sqlite": {
         "pkg-path": "sqlite"
+      },
+      "termgraph": {
+        "pkg-path": "python313Packages.termgraph"
       }
     },
     "vars": {
@@ -715,6 +718,130 @@
       "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
+    },
+    {
+      "attr_path": "python313Packages.termgraph",
+      "broken": false,
+      "derivation": "/nix/store/1r163yji2krg0jpj1388mpssifa5wrny-python3.13-termgraph-0.5.3.drv",
+      "description": "Python command-line tool which draws basic graphs in the terminal",
+      "install_id": "termgraph",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "python3.13-termgraph-0.5.3",
+      "pname": "termgraph",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T00:36:42.851909Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.5.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/galzjgjiy9b1lqpa97m3lq2hgrpykf54-python3.13-termgraph-0.5.3-dist",
+        "out": "/nix/store/9w5pi2d5hn0bbr3n7xxmcakwdpclrww0-python3.13-termgraph-0.5.3"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python313Packages.termgraph",
+      "broken": false,
+      "derivation": "/nix/store/czj1vc14ayzh4xn8lj42zm1vp6qxp8a3-python3.13-termgraph-0.5.3.drv",
+      "description": "Python command-line tool which draws basic graphs in the terminal",
+      "install_id": "termgraph",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "python3.13-termgraph-0.5.3",
+      "pname": "termgraph",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T00:55:37.574499Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.5.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/s8247r23i58ykxnf3cml6jimd4dv6nc6-python3.13-termgraph-0.5.3-dist",
+        "out": "/nix/store/6mvr0p67kfg1hrg29z2a678qcqynmini-python3.13-termgraph-0.5.3"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python313Packages.termgraph",
+      "broken": false,
+      "derivation": "/nix/store/m5g84kh959ly0mggiyhz5f2rr7bmap8l-python3.13-termgraph-0.5.3.drv",
+      "description": "Python command-line tool which draws basic graphs in the terminal",
+      "install_id": "termgraph",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "python3.13-termgraph-0.5.3",
+      "pname": "termgraph",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T01:12:50.737796Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.5.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/8kgl3lrpabf1smlamlsf1f4vq11x1qps-python3.13-termgraph-0.5.3-dist",
+        "out": "/nix/store/qb2ydcz7r9na351fy61a9rxjy4zdmvma-python3.13-termgraph-0.5.3"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python313Packages.termgraph",
+      "broken": false,
+      "derivation": "/nix/store/07a040kryjlsadmysn662min8d3i6nja-python3.13-termgraph-0.5.3.drv",
+      "description": "Python command-line tool which draws basic graphs in the terminal",
+      "install_id": "termgraph",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "name": "python3.13-termgraph-0.5.3",
+      "pname": "termgraph",
+      "rev": "9e83b64f727c88a7711a2c463a7b16eedb69a84c",
+      "rev_count": 816272,
+      "rev_date": "2025-06-17T04:31:58Z",
+      "scrape_date": "2025-06-18T01:33:22.214747Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.5.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/yd2waib748w0ihq4fbwwmyi2cks39iwr-python3.13-termgraph-0.5.3-dist",
+        "out": "/nix/store/gkg786jj1cn8bi1lwghsbkgi72c6z9i4-python3.13-termgraph-0.5.3"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
     }
   ],
   "compose": {
@@ -729,6 +856,9 @@
         },
         "sqlite": {
           "pkg-path": "sqlite"
+        },
+        "termgraph": {
+          "pkg-path": "python313Packages.termgraph"
         }
       },
       "hook": {
